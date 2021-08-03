@@ -7,6 +7,10 @@
   },
   "description": "API for managing all data refer to Olympics Games throughout time",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Criscape/olympics-back.git"
+  },
   "scripts": {
     "build": "./node_modules/.bin/ts-node build.ts",
     "lint": "eslint . --ext .ts",
