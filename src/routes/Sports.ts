@@ -1,4 +1,4 @@
-import { paramMissingError } from '@shared/constants';
+import { paramMissingError, successful } from '@shared/constants';
 import logger from '@shared/Logger';
 import { Request, Response } from 'express';
 import { StatusCodes } from "http-status-codes";
@@ -13,5 +13,5 @@ export async function addSports(req: Request, res: Response) {
         logger.err(err);
         return res.status(BAD_REQUEST).json({ error: paramMissingError });
     });
-    return res.status(CREATED).json();
+    return res.status(CREATED).json({ans: successful});
 }

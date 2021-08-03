@@ -4,6 +4,10 @@ const Schema = mongoose.Schema;
 
 const eventSchema = new Schema({
     name: Schema.Types.String,
+    sport: {
+        type: Schema.Types.ObjectId,
+        ref: 'Sport'
+    },
     medals: [{
         type: Schema.Types.ObjectId,
         ref: 'Medal'
