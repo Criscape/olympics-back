@@ -1,15 +1,12 @@
 import { Router } from 'express';
+import { addSports } from './Sports';
 
 
-// User-route
-//const userRouter = Router();
-//userRouter.get('/all', getAllUsers);
-//userRouter.post('/add', addOneUser);
-//userRouter.put('/update', updateOneUser);
-//userRouter.delete('/delete/:id', deleteOneUser);
+const sportRouter = Router();
+sportRouter.post('/addSports', addSports);
 
 
 // Export the base-router
 const baseRouter = Router();
-//baseRouter.use('/users', userRouter);
+baseRouter.use('/sports', sportRouter);
 export default baseRouter;
