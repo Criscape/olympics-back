@@ -2,13 +2,13 @@ import { paramMissingError, successful } from '@shared/constants';
 import logger from '@shared/Logger';
 import { Request, Response } from 'express';
 import { StatusCodes } from "http-status-codes";
-import { SportController } from 'src/controllers/SportController';
+import { CountryController } from 'src/controllers/CountryController';
 const { BAD_REQUEST, CREATED } = StatusCodes;
 
-export async function addSports(req: Request, res: Response) {
-    const controller = new SportController();
+export async function addCountries(req: Request, res: Response) {
+    const controller = new CountryController();
     const body = req.body;
-    await controller.createSports(body)
+    await controller.createCountries(body)
     .catch(err => {
         logger.err(err);
         return res.status(BAD_REQUEST).json({ error: paramMissingError });

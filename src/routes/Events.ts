@@ -3,7 +3,7 @@ import logger from '@shared/Logger';
 import { Request, Response } from 'express';
 import { StatusCodes } from "http-status-codes";
 import { EventController } from 'src/controllers/EventController';
-const { BAD_REQUEST, CREATED, OK } = StatusCodes;
+const { BAD_REQUEST, CREATED } = StatusCodes;
 
 export async function addEvents(req: Request, res: Response) {
     const controller = new EventController();
@@ -14,9 +14,9 @@ export async function addEvents(req: Request, res: Response) {
         return res.status(BAD_REQUEST).json({ error: paramMissingError });
     });
     switch (result) {
-        case 0: res.status(BAD_REQUEST).json({ error: "Bad sportShortname param" });
-        case 1: res.status(BAD_REQUEST).json({ error: "Failed in insert" });
-        case 2: res.status(BAD_REQUEST).json({ error: "Failed updating sports" });
+        case 0: return res.status(BAD_REQUEST).json({ error: "Bad sportShortname param" });
+        case 1: return res.status(BAD_REQUEST).json({ error: "Failed in insert" });
+        case 2: return res.status(BAD_REQUEST).json({ error: "Failed updating sports" });
         default: return res.status(CREATED).json({ans: successful});
     }
 }

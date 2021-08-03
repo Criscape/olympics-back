@@ -7,22 +7,21 @@ export class EventController {
 
     async createEvents(events: IEventBody[]) {
         let sportsRef: any = {};
+        let newEvents = [];
         for (const event of events) {
-            const result = await this.findSportByShortname(event.sportShortname)
-            .catch(err => logger.err(err));
-            if (!result) {
-                return 0;
+            if (sportsRef[event.sportShortname] === undefined)  {
+                const result = await this.findSportByShortname(event.sportShortname)
+                .catch(err => logger.err(err));
+                if (!result) {
+                    return 0;
+                }
+                sportsRef[event.sportShortname] = result.id;
             }
-            if (sportsRef[result.shortname] === undefined) {
-                sportsRef[result.shortname] = result.id;
-            }
-        }
-        let newEvents = events.map(event => {
-            return {
+            newEvents.push({
                 sport: sportsRef[event.sportShortname],
                 name: event.name
-            };
-        });
+            });
+        }
         const result = await Event.insertMany(newEvents)
         .catch(err => logger.err(err));
         if (result) {
