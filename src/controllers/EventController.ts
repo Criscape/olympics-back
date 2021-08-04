@@ -8,24 +8,31 @@ export class EventController {
     async createEvents(events: IEventBody[]) {
         let sportsRef: any = {};
         let newEvents = [];
+        let excluded = false;
         for (const event of events) {
+            excluded = false;
             if (sportsRef[event.sportShortname] === undefined)  {
                 const result = await this.findSportByShortname(event.sportShortname)
                 .catch(err => logger.err(err));
                 if (!result) {
-                    return 0;
+                    logger.info("There's no sport " + event.sportShortname);
+                    excluded = true;
+                    //return 0;
+                } else {
+                    sportsRef[event.sportShortname] = result.id;
                 }
-                sportsRef[event.sportShortname] = result.id;
             }
-            newEvents.push({
-                sport: sportsRef[event.sportShortname],
-                name: event.name
-            });
+            if (!excluded) {
+                newEvents.push({
+                    sport: sportsRef[event.sportShortname],
+                    name: event.name
+                });
+            }
         }
         const result = await Event.insertMany(newEvents)
         .catch(err => logger.err(err));
         if (result) {
-            const sportIds = result.map(event => event.sport);
+            const sportIds = new Set(result.map(event => event.sport));
             for (let sportId of sportIds) {
                 const filterEvents = result.filter(event => event.sport === sportId);
                 const eventsIds = filterEvents.map(event => event.id);

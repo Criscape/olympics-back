@@ -10,11 +10,13 @@ export interface IEventBody {
 
 export interface ICountry {
     name: string;
+    shortname: string;
+    flagUrl: string;
 }
 
 export interface IMedalBody {
     rank: string;
-    country: string;
+    countryShortname: string;
     sportShortname: string;
     event: string;
 }
