@@ -11,5 +11,9 @@ export class SportController {
         return await Sport.create(sport);
     }
 
+    async getAll() {
+        return await Sport.find({});
+    }
+
 }
 

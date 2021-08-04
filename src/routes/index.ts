@@ -2,11 +2,12 @@ import { Router } from 'express';
 import { addCountries } from './Countries';
 import { addEvents } from './Events';
 import { addMedals } from './Medals';
-import { addSports } from './Sports';
+import { addSports, getSports } from './Sports';
 
 
 const sportRouter = Router();
 sportRouter.post('/addSports', addSports);
+sportRouter.get('/getSports', getSports);
 
 const eventRouter = Router();
 eventRouter.post('/addEvents', addEvents);
