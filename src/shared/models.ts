@@ -14,6 +14,13 @@ export interface ICountry {
     flagUrl: string;
 }
 
+export interface ICountryDB {
+    name: string;
+    shortname: string;
+    flagUrl: string;
+    medals: string[];
+}
+
 export interface IMedalBody {
     rank: string;
     countryShortname: string;

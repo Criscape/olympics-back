@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { addCountries } from './Countries';
+import { addCountries, getBoard } from './Countries';
 import { addEvents } from './Events';
 import { addMedals } from './Medals';
 import { addSports, getSports } from './Sports';
@@ -14,6 +14,7 @@ eventRouter.post('/addEvents', addEvents);
 
 const countryRouter = Router();
 countryRouter.post('/addCountries', addCountries);
+countryRouter.get('/getBoard', getBoard);
 
 const medalRouter = Router();
 medalRouter.post('/addMedals', addMedals);
